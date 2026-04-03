@@ -1,0 +1,19 @@
+# 🚀 TP: Videoclub "The Mandalorian" (Flask + Redis)
+
+Hola! Este es mi proyecto para simular un videoclub de The Mandalorian. Me costó un poco entender cómo enganchar la base de datos con la página, pero al final anduvo todo de diez. 
+
+Uso Flask para levantar la web y Redis adentro de Docker para guardar si los capítulos están disponibles, reservados o alquilados. 
+
+Antes de correr cualquier cosa, asegúrate de tener instalado:
+1. python (yo usé la versión 3, espero que con otras no explote nada).
+2. Docker Desktop (clave para levantar Redis sin tener que instalarlo directo en Windows/Linux).
+
+
+Pasos para ejecutar el proyecto (y que no tire error)
+
+Seguí estos pasos en orden, porfa:
+
+1. Levantar la base de datos (Redis)
+Primero tenemos que prender la base de datos para que Flask no tire error de conexión. Abrí una terminal cualquiera y pegá este comando mágico de Docker:
+
+docker run -d --name redis-db -p 6379:6379 redis
