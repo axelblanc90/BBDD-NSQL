@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  db:
+    image: mongo:latest
+    container_name: superheroes_db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  backend:
+    build: ./backend
+    container_name: superheroes_backend
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb://db:27017/superheroes_db
+    depends_on:
+      - db
+    volumes:
+      - ./backend:/app
+
+  frontend:
+    build: ./frontend
+    container_name: superheroes_frontend
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:5000/api
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+
+volumes:
+  mongo_data:
